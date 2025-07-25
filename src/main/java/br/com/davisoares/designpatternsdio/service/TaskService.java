@@ -1,7 +1,6 @@
 package br.com.davisoares.designpatternsdio.service;
 
 import br.com.davisoares.designpatternsdio.model.Task;
-import org.springframework.stereotype.Service;
 
 public interface TaskService {
     Task findById(Long id);

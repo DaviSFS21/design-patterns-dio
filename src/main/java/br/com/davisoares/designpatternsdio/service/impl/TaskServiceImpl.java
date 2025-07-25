@@ -7,6 +7,9 @@ import br.com.davisoares.designpatternsdio.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.util.Arrays.stream;
 
 @Service
@@ -46,6 +49,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Iterable<Task> searchTask(String title) {
-        return taskRepository.findByTitleContaining(title);
+        Iterable<Task> tasks = taskRepository.findByTitleContaining(title);
+        List<Task> taskList = new ArrayList<>();
+        tasks.forEach(taskList::add);
+        return taskList;
     }
 }
