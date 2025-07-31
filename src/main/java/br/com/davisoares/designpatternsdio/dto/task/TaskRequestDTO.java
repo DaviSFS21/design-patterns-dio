@@ -1,14 +1,10 @@
 package br.com.davisoares.designpatternsdio.dto.task;
 
 import br.com.davisoares.designpatternsdio.model.Task;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Getter
 @Builder
 public class TaskRequestDTO {
     private String title;

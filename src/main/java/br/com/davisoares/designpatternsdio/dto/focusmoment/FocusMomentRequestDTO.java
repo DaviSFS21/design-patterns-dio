@@ -1,16 +1,12 @@
 package br.com.davisoares.designpatternsdio.dto.focusmoment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
+@Getter
 @Builder
 public class FocusMomentRequestDTO {
     private String description;
