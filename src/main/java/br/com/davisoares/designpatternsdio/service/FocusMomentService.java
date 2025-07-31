@@ -1,12 +1,13 @@
 package br.com.davisoares.designpatternsdio.service;
 
+import br.com.davisoares.designpatternsdio.dto.focusmoment.FocusMomentRequestDTO;
 import br.com.davisoares.designpatternsdio.model.FocusMoment;
 
 import java.time.LocalDateTime;
 
 public interface FocusMomentService {
     FocusMoment findById(Long id);
-    FocusMoment save(FocusMoment focusMoment);
+    FocusMoment save(FocusMomentRequestDTO focusMomentDTO);
     FocusMoment update(Long id,
                        LocalDateTime startTime,
                        LocalDateTime endTime,

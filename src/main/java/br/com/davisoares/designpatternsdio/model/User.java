@@ -1,10 +1,8 @@
 package br.com.davisoares.designpatternsdio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,15 +16,13 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Builder
-public class Task {
+public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String title;
-    private String description;
-    private boolean completed;
+    private String username;
+    @JsonIgnore
+    private String password;
+    @JsonIgnore
     @OneToMany
-    private List<FocusMoment> focusMoment;
-    @ManyToOne
-    private User user;
+    private List<Task> task;
 }

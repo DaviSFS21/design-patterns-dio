@@ -1,5 +1,6 @@
 package br.com.davisoares.designpatternsdio.service.impl;
 
+import br.com.davisoares.designpatternsdio.dto.focusmoment.FocusMomentRequestDTO;
 import br.com.davisoares.designpatternsdio.model.FocusMoment;
 import br.com.davisoares.designpatternsdio.model.Task;
 import br.com.davisoares.designpatternsdio.repository.TaskRepository;
@@ -17,8 +18,8 @@ public class FocusMomentServiceImpl implements FocusMomentService {
     @Autowired
     private TaskRepository taskRepository;
 
-    public FocusMoment save(FocusMoment focusMoment) {
-        return focusMomentRepository.save(focusMoment);
+    public FocusMoment save(FocusMomentRequestDTO focusMomentDTO) {
+        return focusMomentRepository.save(fromRequestDTO(focusMomentDTO));
     }
 
     public FocusMoment findById(Long id) {
@@ -54,5 +55,17 @@ public class FocusMomentServiceImpl implements FocusMomentService {
 
     public Iterable<FocusMoment> findByStartTimeBetween(LocalDateTime start, LocalDateTime end) {
         return focusMomentRepository.findByStartTimeBetween(start, end);
+    }
+
+    private FocusMoment fromRequestDTO(FocusMomentRequestDTO focusMomentDTO) {
+        FocusMoment focusMoment = new FocusMoment();
+        focusMoment.setDescription(focusMomentDTO.getDescription());
+        focusMoment.setStartTime(focusMomentDTO.getStartTime());
+        focusMoment.setEndTime(focusMomentDTO.getEndTime());
+        if (focusMomentDTO.getTaskId() != null) {
+            Task task = taskRepository.findById(focusMomentDTO.getTaskId()).orElse(null);
+            focusMoment.setTask(task);
+        }
+        return focusMoment;
     }
 }
