@@ -14,12 +14,11 @@ import java.util.List;
 public class JwtIssuer {
     private final JwtProperties properties;
 
-    public String issue(long userId, String email, List<String> roles) {
+    public String issue(long userId, String username) {
         return JWT.create()
                 .withSubject(String.valueOf(userId))
                 .withExpiresAt(Instant.now().plus(Duration.ofDays(1)))
-                .withClaim("e", email)
-                .withClaim("a", roles)
+                .withClaim("u", username)
                 .sign(Algorithm.HMAC256(properties.getSecretKey()));
     }
 }

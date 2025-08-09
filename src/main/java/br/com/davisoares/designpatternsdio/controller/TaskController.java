@@ -3,7 +3,9 @@ package br.com.davisoares.designpatternsdio.controller;
 import br.com.davisoares.designpatternsdio.dto.task.TaskListResponseDTO;
 import br.com.davisoares.designpatternsdio.dto.task.TaskRequestDTO;
 import br.com.davisoares.designpatternsdio.dto.task.TaskResponseDTO;
+import br.com.davisoares.designpatternsdio.model.Person;
 import br.com.davisoares.designpatternsdio.model.Task;
+import br.com.davisoares.designpatternsdio.service.PersonService;
 import br.com.davisoares.designpatternsdio.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskController {
     @Autowired
     private TaskService taskService;
+    @Autowired
+    private PersonService personService;
 
     @GetMapping
     @Operation(summary = "Retrieve all tasks",
@@ -37,7 +41,8 @@ public class TaskController {
     @Operation(summary = "Create a new task",
                description = "Creates a new task with the provided details.")
     public ResponseEntity<TaskResponseDTO> createTask(@RequestBody TaskRequestDTO taskDTO) {
-        Task newTask = TaskRequestDTO.toModel(taskDTO);
+        Person person = personService.findById(taskDTO.getPersonId());
+        Task newTask = TaskRequestDTO.toModel(taskDTO, person);
         Task task = taskService.save(newTask);
         return ResponseEntity.ok(TaskResponseDTO.fromModel(task));
     }

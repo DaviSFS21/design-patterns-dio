@@ -21,7 +21,7 @@ public class TaskResponseDTO {
                 .id(task.getId())
                 .title(task.getTitle())
                 .description(task.getDescription())
-                .completed(task.isCompleted())
+                .completed(task.getCompleted())
                 .build();
     }
 }

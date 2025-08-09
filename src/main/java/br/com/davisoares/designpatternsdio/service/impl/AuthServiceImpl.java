@@ -24,11 +24,7 @@ public class AuthServiceImpl implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         var principal = (UserPrincipal) authentication.getPrincipal();
 
-        var roles = principal.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .toList();
-
-        var token = jwtIssuer.issue(principal.getUserId(), principal.getUsername(), roles);
+        var token = jwtIssuer.issue(principal.getUserId(), principal.getUsername());
         return LoginResponseDTO
                 .builder()
                 .token(token)

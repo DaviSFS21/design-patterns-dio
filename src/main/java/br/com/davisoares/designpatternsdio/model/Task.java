@@ -25,10 +25,10 @@ public class Task {
     private Long id;
     private String title;
     private String description;
-    private boolean completed;
+    private Boolean completed;
     @OneToMany
     private List<FocusMoment> focusMoment;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Person person;
 }

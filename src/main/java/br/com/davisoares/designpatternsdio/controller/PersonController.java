@@ -3,7 +3,7 @@ package br.com.davisoares.designpatternsdio.controller;
 import br.com.davisoares.designpatternsdio.dto.login.LoginRequestDTO;
 import br.com.davisoares.designpatternsdio.dto.login.LoginResponseDTO;
 import br.com.davisoares.designpatternsdio.service.AuthService;
-import br.com.davisoares.designpatternsdio.service.UserService;
+import br.com.davisoares.designpatternsdio.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-public class UserController {
+public class PersonController {
     @Autowired
     private final AuthService authService;
     @Autowired
-    private final UserService userService;
+    private final PersonService personService;
 
     @PostMapping("/auth/login")
     public LoginResponseDTO login(@RequestBody LoginRequestDTO requestDTO) {
@@ -26,7 +26,7 @@ public class UserController {
 
     @PostMapping("/auth/register")
     public ResponseEntity<Boolean> register(@RequestBody LoginRequestDTO requestDTO) {
-        boolean status = userService.registerUser(requestDTO.getUsername(), requestDTO.getPassword());
+        boolean status = personService.registerUser(requestDTO.getUsername(), requestDTO.getPassword());
         return ResponseEntity.ok(status);
     }
 }
