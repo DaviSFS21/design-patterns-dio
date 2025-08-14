@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: design-patterns-dio
+  datasource:
+    url: jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+cors:
+  allowed-origins: https://*.davisoares.com.br,https://davisfs21.github.io,http://localhost:8080,https://preview-openapi-definition-kzmr0tznol6sekqdhxte.vusercontent.net
+  allowed-methods: GET,POST,PUT,DELETE,PATCH
+security:
+  jwt:
+    secret-key: design-patterns-dio
