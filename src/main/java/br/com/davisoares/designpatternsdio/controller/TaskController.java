@@ -5,11 +5,13 @@ import br.com.davisoares.designpatternsdio.dto.task.TaskRequestDTO;
 import br.com.davisoares.designpatternsdio.dto.task.TaskResponseDTO;
 import br.com.davisoares.designpatternsdio.model.Person;
 import br.com.davisoares.designpatternsdio.model.Task;
+import br.com.davisoares.designpatternsdio.security.UserPrincipal;
 import br.com.davisoares.designpatternsdio.service.PersonService;
 import br.com.davisoares.designpatternsdio.service.TaskService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -32,8 +34,9 @@ public class TaskController {
     @GetMapping
     @Operation(summary = "Retrieve all tasks",
                description = "Returns a list of all tasks stored in the system.")
-    public ResponseEntity<TaskListResponseDTO> getAllTasks() {
-        Iterable<Task> tasks = taskService.findAll();
+    public ResponseEntity<TaskListResponseDTO> getAllTasks(
+            @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        Iterable<Task> tasks = taskService.findAllByPersonId(userPrincipal.getUserId());
         return ResponseEntity.ok(TaskListResponseDTO.fromIterable(tasks));
     }
 

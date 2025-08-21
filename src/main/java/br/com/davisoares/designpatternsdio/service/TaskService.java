@@ -8,6 +8,6 @@ public interface TaskService {
     Task update(Long id, String title, String description);
     Task updateStatus(Long id, boolean status);
     void delete(Long id);
-    Iterable<Task> findAll();
+    Iterable<Task> findAllByPersonId(Long userId);
     Iterable<Task> searchTask(String title);
 }

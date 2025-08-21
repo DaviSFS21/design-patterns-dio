@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Long> {
 
-    Iterable<Task> findByCompleted(boolean completed);
+    Iterable<Task> findAllByPersonId(Long id);
 
     Iterable<Task> findByTitleContaining(String title);
 }

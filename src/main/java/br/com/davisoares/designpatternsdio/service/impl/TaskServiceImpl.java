@@ -42,8 +42,8 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.delete(existingTask);
     }
 
-    public Iterable<Task> findAll() {
-        return taskRepository.findAll();
+    public Iterable<Task> findAllByPersonId(Long id) {
+        return taskRepository.findAllByPersonId(id);
     }
 
     public Iterable<Task> searchTask(String title) {
