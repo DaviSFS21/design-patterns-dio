@@ -5,6 +5,7 @@ import br.com.davisoares.designpatternsdio.dto.task.TaskRequestDTO;
 import br.com.davisoares.designpatternsdio.dto.task.TaskResponseDTO;
 import br.com.davisoares.designpatternsdio.model.Person;
 import br.com.davisoares.designpatternsdio.model.Task;
+import br.com.davisoares.designpatternsdio.model.TaskStatus;
 import br.com.davisoares.designpatternsdio.security.UserPrincipal;
 import br.com.davisoares.designpatternsdio.service.PersonService;
 import br.com.davisoares.designpatternsdio.service.TaskService;
@@ -70,10 +71,10 @@ public class TaskController {
 
     @PatchMapping("/{id}/status")
     @Operation(summary = "Update task status",
-               description = "Updates the completion status of a task identified by its ID.")
+               description = "Updates the status (TODO, DOING, DONE) of a task identified by its ID.")
     public ResponseEntity<TaskResponseDTO> updateTaskStatus(@PathVariable Long id,
-                                                            @RequestParam boolean completed) {
-        Task updatedTask = taskService.updateStatus(id, completed);
+                                                            @RequestParam TaskStatus status) {
+        Task updatedTask = taskService.updateStatus(id, status);
         return ResponseEntity.ok(TaskResponseDTO.fromModel(updatedTask));
     }
 

@@ -2,6 +2,7 @@ package br.com.davisoares.designpatternsdio.service.impl;
 
 import br.com.davisoares.designpatternsdio.exceptions.TaskException;
 import br.com.davisoares.designpatternsdio.model.Task;
+import br.com.davisoares.designpatternsdio.model.TaskStatus;
 import br.com.davisoares.designpatternsdio.repository.TaskRepository;
 import br.com.davisoares.designpatternsdio.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Task save(Task task) {
+        if (task.getStatus() == null) {
+            task.setStatus(TaskStatus.TODO);
+        }
         return taskRepository.save(task);
     }
 
@@ -31,9 +35,9 @@ public class TaskServiceImpl implements TaskService {
         return taskRepository.save(existingTask);
     }
 
-    public Task updateStatus(Long id, boolean completed) {
+    public Task updateStatus(Long id, TaskStatus status) {
         Task existingTask = findById(id);
-        existingTask.setCompleted(completed);
+        existingTask.setStatus(status);
         return taskRepository.save(existingTask);
     }
 
